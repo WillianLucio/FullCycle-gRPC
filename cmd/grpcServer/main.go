@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"net"
 
+	_ "github.com/mattn/go-sqlite3"
 	"github.com/willianlucio/FullCycle-GraphQL/internal/database"
 	"github.com/willianlucio/FullCycle-GraphQL/internal/pb"
 	"github.com/willianlucio/FullCycle-GraphQL/internal/service"
@@ -25,7 +26,7 @@ func main() {
 	pb.RegisterCategoryServiceServer(grpcServer, categoryService)
 	reflection.Register(grpcServer)
 
-	lis, err := net.Listen("tct", ":50051")
+	lis, err := net.Listen("tcp", ":50051")
 	if err != nil {
 		panic(err)
 	}
